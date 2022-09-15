@@ -6,3 +6,4 @@ for i in range(number):
         print(f"{string} is not pure!")
     else:
         print(f"{string} is pure.")
+
