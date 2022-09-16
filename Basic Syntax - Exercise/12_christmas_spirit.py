@@ -26,7 +26,7 @@ for i in range(1, days_left + 1):
     if i % 5 == 0:
         price += quantity * tree_lights_price
         spirit_point += tree_lights_spirit_point
-        if i % 3 == 0 and i % 5 == 0:
+        if i % 3 == 0:
             spirit_point += 30
     if i % 10 == 0:
         spirit_point -= 20
