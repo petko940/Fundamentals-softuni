@@ -2,12 +2,14 @@ command = input()
 
 coffee = 0
 while command != "END":
-    if command == "coding" or command == "dog" \
-            or command == "cat" or command == "movie":
-        coffee += 1
-    elif command == "CODING" or command == "DOG" \
-            or command == "CAT" or command == "MOVIE":
-        coffee += 2
+    if command.lower() == "coding" \
+            or command.lower() == "dog" \
+            or command.lower() == "cat" \
+            or command.lower() == "movie":
+        if command.islower():
+            coffee += 1
+        else:
+            coffee += 2
     command = input()
 
 if coffee > 5:
