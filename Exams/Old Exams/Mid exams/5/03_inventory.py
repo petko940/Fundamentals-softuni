@@ -1,45 +1,89 @@
-def collect(item, data_func: list):
-    if item not in data_func:
-        data_func.append(item)
+def collect(item):
+    if item not in inventory:
+        inventory.append(item)
 
 
-def drop(item, data_func: list):
-    if item in data_func:
-        data_func.remove(item)
+def drop(item):
+    if item in inventory:
+        inventory.remove(item)
 
 
-def combine_items(old_item, new_item, data_func: list):
-    if old_item in data_func:
-        index = data_func.index(old_item)
-        data_func.insert(index + 1, new_item)
+def combine_items(item):
+    old_item, new_item = item.split(':')[0], item.split(':')[1]
+    if old_item in inventory:
+        index = inventory.index(old_item)
+        inventory.insert(index + 1, new_item)
 
 
-def renew(item, data_func: list):
-    if item in data_func:
-        index = data_func.index(item)
-        change_pos = data_func.pop(index)
-        data_func.append(change_pos)
+def renew(item):
+    if item in inventory:
+        inventory.remove(item)
+        inventory.append(item)
 
 
-data = input().split(", ")
-while True:
-    command_data = input()
+def main():
+    commands = {
+        "Collect": collect,
+        "Drop": drop,
+        "Combine Items": combine_items,
+        "Renew": renew,
+    }
 
-    if "Craft!" in command_data:
-        break
+    while True:
+        command = input()
+        if command == "Craft!":
+            break
 
-    command, product = command_data.split(" - ")
-    if "Collect" in command:
-        collect(product, data)
-    elif "Drop" in command:
-        drop(product, data)
-    elif "Combine" in command:
-        old_product, new_product = product.split(":")
-        combine_items(old_product, new_product, data)
-    elif "Renew" in command:
-        renew(product, data)
+        cmd, *args = command.split(" - ")
+        commands[cmd](*args)
 
-print(*data, sep=", ")
+
+inventory = input().split(", ")
+main()
+print(*inventory, sep=", ")
+
+# def collect(item, data_func: list):
+#     if item not in data_func:
+#         data_func.append(item)
+#
+#
+# def drop(item, data_func: list):
+#     if item in data_func:
+#         data_func.remove(item)
+#
+#
+# def combine_items(old_item, new_item, data_func: list):
+#     if old_item in data_func:
+#         index = data_func.index(old_item)
+#         data_func.insert(index + 1, new_item)
+#
+#
+# def renew(item, data_func: list):
+#     if item in data_func:
+#         index = data_func.index(item)
+#         change_pos = data_func.pop(index)
+#         data_func.append(change_pos)
+#
+#
+# data = input().split(", ")
+# while True:
+#     command_data = input()
+#
+#     if "Craft!" in command_data:
+#         break
+#
+#     command, product = command_data.split(" - ")
+#     if "Collect" in command:
+#         collect(product, data)
+#     elif "Drop" in command:
+#         drop(product, data)
+#     elif "Combine" in command:
+#         old_product, new_product = product.split(":")
+#         combine_items(old_product, new_product, data)
+#     elif "Renew" in command:
+#         renew(product, data)
+#
+# print(*data, sep=", ")
 
 
 # def collect():
